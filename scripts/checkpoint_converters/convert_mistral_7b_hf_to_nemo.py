@@ -101,7 +101,7 @@ def load_config(mistral_config, tokenizer_path):
     ).model
     # akoumparouli: verify this.
     nemo_config.encoder_seq_length = mistral_config['sliding_window']
-    nemo_config.num_layers = 2 #int(mistral_config['num_hidden_layers'])
+    nemo_config.num_layers = 2  # int(mistral_config['num_hidden_layers'])
     nemo_config.hidden_size = mistral_config['hidden_size']
     nemo_config.ffn_hidden_size = mistral_config['intermediate_size']
     nemo_config.num_attention_heads = mistral_config['num_attention_heads']
@@ -167,7 +167,7 @@ def convert(args):
         scaler = None
         if precision in [16, '16', '16-mixed']:
             scaler = GradScaler(
-                init_scale=nemo_config.get('native_amp_init_scale', 2 ** 32),
+                init_scale=nemo_config.get('native_amp_init_scale', 2**32),
                 growth_interval=nemo_config.get('native_amp_growth_interval', 1000),
                 hysteresis=nemo_config.get('hysteresis', 2),
             )
@@ -332,6 +332,7 @@ def convert(args):
     model.save_to(args.output_path)
     logging.info(f'NeMo model saved to: {args.output_path}')
     print(tokenizer)
+
 
 if __name__ == '__main__':
     args = get_args()
